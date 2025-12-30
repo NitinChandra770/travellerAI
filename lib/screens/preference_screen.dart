@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../data/local/traveller.dart';
 import '../main.dart';
 import '../routes.dart';
 
 class PreferenceScreen extends StatefulWidget {
   final String mobileNumber;
+
   const PreferenceScreen({super.key, required this.mobileNumber});
 
   @override
