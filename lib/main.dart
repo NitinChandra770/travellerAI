@@ -28,7 +28,7 @@ void main() async {
       final t = travellerBox.getAt(i);
       if (t != null) {
         debugPrint(
-          'Entry #$i: Name: ${t.name}, Age: ${t.age}, Email: ${t.email}',
+          'Entry #$i: Name: ${t.name}, Age: ${t.age}, Email: ${t.email}, Mobile: ${t.mobile}, TravelType: ${t.travelType}, Interests: ${t.interests}, IsPreferenceSet: ${t.isPreferenceSet},profileImagePath: ${t.profileImagePath}',
         );
       }
     }

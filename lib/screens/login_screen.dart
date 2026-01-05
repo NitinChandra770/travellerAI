@@ -66,7 +66,18 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Login")),
+      appBar: AppBar(
+        title: const Text("Login"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, Routes.report);
+            },
+            icon: const Icon(Icons.report_problem, color: Colors.red),
+            tooltip: "Report Issue",
+          ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Align(
@@ -76,17 +87,17 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/images/logo.png',
-                  width: 180,
-                  height: 180,
+                  'assets/images/logo1.png',
+                  width: 200,
+                  height: 200,
                   fit: BoxFit.contain,
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 5),
                 const Text(
                   "Enter Mobile Number",
                   style: TextStyle(fontSize: 24),
                 ),
-                const SizedBox(height: 35),
+                const SizedBox(height: 25),
                 TextField(
                   controller: _mobileController,
                   autofocus: true,
@@ -104,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 35),
                 ElevatedButton(
                   onPressed: _isButtonEnabled ? _login : null,
                   style: ElevatedButton.styleFrom(

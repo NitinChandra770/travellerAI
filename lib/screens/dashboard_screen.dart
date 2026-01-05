@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-import '../core/storage/app_preferences.dart';
 import '../routes.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -11,71 +11,55 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  void _goToPreferences() async {
-    final mobile = await AppPreferences.getMobileNumber();
-    if (mobile != null && mounted) {
-      Navigator.pushNamed(context, Routes.preference, arguments: mobile);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Dashboard'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            tooltip: 'Logout',
-            onPressed: () => _showLogoutDialog(context),
-          ),
-        ],
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Welcome to Traveller AI Dashboard',
-              style: TextStyle(fontSize: 18),
+    return PopScope(
+      canPop: false, // Prevents default back navigation
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
+        // Exit the app completely when back is pressed
+        SystemNavigator.pop();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Dashboard'),
+          automaticallyImplyLeading: false, // Removes the back button
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.notifications),
+              tooltip: 'Notifications',
+              onPressed: () {
+                // TODO: Implement notification logic
+              },
             ),
-            const SizedBox(height: 30),
-            ElevatedButton(
-              onPressed: _goToPreferences,
-              child: const Text('Edit Preferences'),
+            IconButton(
+              icon: const Icon(Icons.person),
+              tooltip: 'Profile',
+              onPressed: () {
+                Navigator.pushNamed(context, Routes.profile);
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.share),
+              tooltip: 'Share',
+              onPressed: () {
+                // TODO: Implement share logic
+              },
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  void _showLogoutDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Logout'),
-        content: const Text('Are you sure you want to logout?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Welcome to Traveller AI Dashboard',
+                style: TextStyle(fontSize: 18),
+              ),
+              // Removed Edit Preferences button from here
+            ],
           ),
-          TextButton(
-            onPressed: () async {
-              await AppPreferences.logout(); // clear login state
-
-              if (context.mounted) {
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  Routes.login,
-                  (route) => false,
-                );
-              }
-            },
-            child: const Text('Logout', style: TextStyle(color: Colors.red)),
-          ),
-        ],
+        ),
       ),
     );
   }

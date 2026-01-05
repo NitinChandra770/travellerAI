@@ -8,6 +8,7 @@ import '../routes.dart';
 
 class SignupScreen extends StatefulWidget {
   final String mobileNumber;
+
   const SignupScreen({super.key, required this.mobileNumber});
 
   @override
@@ -19,7 +20,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  AutovalidateMode _autovalidateMode = AutovalidateMode.disabled;
+  AutovalidateMode _autovalidateMode = AutovalidateMode.onUserInteraction;
 
   @override
   void dispose() {

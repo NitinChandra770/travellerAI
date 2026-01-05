@@ -23,13 +23,14 @@ class TravellerAdapter extends TypeAdapter<Traveller> {
       ..mobile = fields[3] as String
       ..travelType = fields[4] as String?
       ..interests = (fields[5] as List?)?.cast<String>()
-      ..isPreferenceSet = fields[6] == null ? false : fields[6] as bool;
+      ..isPreferenceSet = fields[6] == null ? false : fields[6] as bool
+      ..profileImagePath = fields[7] as String?;
   }
 
   @override
   void write(BinaryWriter writer, Traveller obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -43,7 +44,9 @@ class TravellerAdapter extends TypeAdapter<Traveller> {
       ..writeByte(5)
       ..write(obj.interests)
       ..writeByte(6)
-      ..write(obj.isPreferenceSet);
+      ..write(obj.isPreferenceSet)
+      ..writeByte(7)
+      ..write(obj.profileImagePath);
   }
 
   @override

@@ -1,34 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/screens/dashboard_screen.dart';
-import 'package:my_app/screens/login_screen.dart';
-import 'package:my_app/screens/otp_screen.dart';
-import 'package:my_app/screens/preference_screen.dart';
-import 'package:my_app/screens/signup_screen.dart';
-import 'package:my_app/screens/splash_screen.dart';
+
+import 'screens/dashboard_screen.dart';
+import 'screens/login_screen.dart';
+import 'screens/otp_screen.dart';
+import 'screens/preference_screen.dart';
+import 'screens/profile_screen.dart';
+import 'screens/report_screen.dart';
+import 'screens/signup_screen.dart';
+import 'screens/splash_screen.dart';
 
 class Routes {
-  static const splash = '/';
-  static const login = '/login';
-  static const signup = '/signup';
-  static const otp = '/otp';
-  static const preference = '/preference';
-  static const dashboard = '/dashboard';
+  static const String splash = '/';
+  static const String login = '/login';
+  static const String otp = '/otp';
+  static const String signup = '/signup';
+  static const String dashboard = '/dashboard';
+  static const String preference = '/preference';
+  static const String report = '/report';
+  static const String profile = '/profile';
 
-  static final all = <String, WidgetBuilder>{
+  static Map<String, WidgetBuilder> get all => {
     splash: (context) => const SplashScreen(),
     login: (context) => const LoginScreen(),
-    signup: (context) {
-      final mobileNumber = ModalRoute.of(context)!.settings.arguments as String;
-      return SignupScreen(mobileNumber: mobileNumber);
-    },
+    dashboard: (context) => const DashboardScreen(),
+    report: (context) => const ReportScreen(),
+    profile: (context) => const ProfileScreen(),
     otp: (context) {
-      final mobileNumber = ModalRoute.of(context)!.settings.arguments as String;
-      return OtpScreen(mobileNumber: mobileNumber);
+      final mobile = ModalRoute.of(context)!.settings.arguments as String;
+      return OtpScreen(mobileNumber: mobile);
+    },
+    signup: (context) {
+      final mobile = ModalRoute.of(context)!.settings.arguments as String;
+      return SignupScreen(mobileNumber: mobile);
     },
     preference: (context) {
-      final mobileNumber = ModalRoute.of(context)!.settings.arguments as String;
-      return PreferenceScreen(mobileNumber: mobileNumber);
+      final mobile = ModalRoute.of(context)!.settings.arguments as String;
+      return PreferenceScreen(mobileNumber: mobile);
     },
-    dashboard: (context) => const DashboardScreen(),
   };
 }

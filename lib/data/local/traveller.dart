@@ -24,4 +24,12 @@ class Traveller extends HiveObject {
 
   @HiveField(6, defaultValue: false)
   bool isPreferenceSet = false;
+
+  @HiveField(7)
+  String? profileImagePath;
+
+  @override
+  String toString() {
+    return 'Traveller(name: $name, age: $age, email: $email, mobile: $mobile, travelType: $travelType, interests: $interests, isPreferenceSet: $isPreferenceSet, profileImagePath: $profileImagePath)';
+  }
 }

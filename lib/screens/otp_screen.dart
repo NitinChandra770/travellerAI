@@ -5,6 +5,7 @@ import '../routes.dart';
 
 class OtpScreen extends StatefulWidget {
   final String mobileNumber;
+
   const OtpScreen({super.key, required this.mobileNumber});
 
   @override
@@ -37,29 +38,35 @@ class _OtpScreenState extends State<OtpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Otp Verification")),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Align(
-          alignment: const Alignment(0.0, -0.4),
+      resizeToAvoidBottomInset:
+          false, // Prevents the screen from resizing automatically
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: SingleChildScrollView(
+            // Add padding equal to keyboard height so content scrolls up
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom + 0,
+              top: 0,
+            ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Image.asset(
-                  'assets/images/logo.png',
-                  width: 180,
-                  height: 180,
+                  'assets/images/logo1.png',
+                  width: 200,
+                  height: 200,
                   fit: BoxFit.contain,
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 15),
                 Text(
                   'Please enter the OTP sent to +91 ${widget.mobileNumber}',
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontSize: 16),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 18),
                 const Text("Enter Otp", style: TextStyle(fontSize: 24)),
-                const SizedBox(height: 35),
+                const SizedBox(height: 18),
                 TextField(
                   controller: _otpController,
                   autofocus: true,
@@ -77,7 +84,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 25),
                 ElevatedButton(
                   onPressed: _isButtonEnabled
                       ? () {
